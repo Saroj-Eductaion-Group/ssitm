@@ -1,4 +1,3 @@
-import React from 'react';
 import Layout from '../components/Layout';
 import Recruiters from './Recruiters';
 import Placement from './Placement';
@@ -9,7 +8,6 @@ import ChairmanMessage from './ChairmanMessage.jsx';
 import AiLearningSection from './AiLearningSection.jsx';
 import  CampusChronicles  from '../components/CampusChronicles.jsx';
 import AdmissionsOpen from '../components/AdmissionsOpen.jsx';
-import Flash from '../components/AiEnabledAdmissions.jsx';
 
 function Home() {
   return (

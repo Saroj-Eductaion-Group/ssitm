@@ -1,5 +1,13 @@
 import { useState, useEffect } from 'react';
 
+const floatAnimation = `
+  @keyframes float {
+    0% { transform: translateY(0) rotate(0deg); }
+    50% { transform: translateY(-20px) rotate(5deg); }
+    100% { transform: translateY(0) rotate(0deg); }
+  }
+`;
+
 const AITag = ({ icon, title, description, isActive, onClick }) => {
   return (
     <div 
@@ -77,7 +85,9 @@ const AiEnabledAdmissions = () => {
   }, [isFloating, tags.length]);
 
   return (
-    <div className="relative min-h-[400px] bg-gradient-to-br from-orange-50 to-orange-100 p-8 rounded-2xl overflow-hidden">
+    <>
+      <style>{floatAnimation}</style>
+      <div className="relative min-h-[400px] bg-gradient-to-br from-orange-50 to-orange-100 p-8 rounded-2xl overflow-hidden">
       {/* Floating background elements */}
       <div className="absolute top-0 left-0 w-full h-full overflow-hidden opacity-20">
         {[...Array(8)].map((_, i) => (

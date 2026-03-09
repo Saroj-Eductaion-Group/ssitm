@@ -1,4 +1,4 @@
-import React from "react";
+import { Link } from "react-router-dom";
 import { BookOpen, PhoneCall, Facebook, Instagram, Linkedin, CreditCard, Users } from "lucide-react";  
 import SearchBar from "./SearchBar";
 
@@ -49,8 +49,8 @@ const TopNav = () => {
       </a>
 
       
-      <a 
-        href="ssitm/fee-payment"  
+      <Link 
+        to="/fee-payment"  
         className="flex items-center bg-orange-700 rounded-full shadow-lg group transition-all hover:scale-105 hover:shadow-xl"
       >
         <div className="bg-orange-800 p-2 px-3 rounded-full text-white group-hover:bg-orange-900">
@@ -59,7 +59,7 @@ const TopNav = () => {
         <span className="text-white font-bold text-base py-2 pr-4 pl-2">
           Pay Fee Online
         </span>
-      </a>
+      </Link>
 
  
       <a
