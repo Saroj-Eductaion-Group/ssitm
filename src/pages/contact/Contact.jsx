@@ -12,7 +12,7 @@ const Contact = () => {
   });
   const [submissionStatus, setSubmissionStatus] = useState('idle');
 
-  const SCRIPT_URL = import.meta.env.VITE_APPS_SCRIPT_URL;
+  const SCRIPT_URL = import.meta.env.VITE_GOOGLE_SCRIPT_URL;
 
   const handleChange = (e) => {
     const { name, value } = e.target;
