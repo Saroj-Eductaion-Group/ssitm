@@ -49,8 +49,8 @@ const TopNav = () => {
       </a>
 
       
-      <Link 
-        to="/fee-payment"  
+      <Link
+        to="/ssitm/fee-payment"
         className="flex items-center bg-orange-700 rounded-full shadow-lg group transition-all hover:scale-105 hover:shadow-xl"
       >
         <div className="bg-orange-800 p-2 px-3 rounded-full text-white group-hover:bg-orange-900">

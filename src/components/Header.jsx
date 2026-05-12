@@ -36,15 +36,17 @@ const navItems = [
 function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [openSubmenu, setOpenSubmenu] = useState(null);
+  const [mobileOpenSubmenu, setMobileOpenSubmenu] = useState(null);
   const menuRef = useRef(null);
 
   const toggleSubmenu = (index) => {
-    setOpenSubmenu(openSubmenu === index ? null : index);
+    setMobileOpenSubmenu(mobileOpenSubmenu === index ? null : index);
   };
 
   const closeAllMenus = () => {
     setMobileMenuOpen(false);
     setOpenSubmenu(null);
+    setMobileOpenSubmenu(null);
   };
 
   useEffect(() => {
@@ -136,7 +138,7 @@ function Header() {
           </button>
         </div>
 
-        <div className={`md:hidden ${mobileMenuOpen ? "max-h-screen" : "max-h-0 overflow-hidden"}`}>
+        <div className={`md:hidden overflow-hidden transition-all duration-300 ease-in-out ${mobileMenuOpen ? "max-h-screen" : "max-h-0"}`}>
           <ul className="pt-2 pb-4 space-y-1">
             {navItems.map((item, index) => (
               <li key={item.path}>
@@ -144,16 +146,16 @@ function Header() {
                   <>
                     <button
                       onClick={() => toggleSubmenu(index)}
-                      className="flex items-center justify-between w-full px-3 py-3 hover:bg-gray-50"
+                      className="flex items-center justify-between w-full px-3 py-3 hover:bg-gray-50 active:bg-gray-100"
                     >
                       <span>{item.title}</span>
                       <ChevronDown
                         className={`w-5 h-5 transition-transform duration-300 ${
-                          openSubmenu === index ? "rotate-180" : ""
+                          mobileOpenSubmenu === index ? "rotate-180" : ""
                         }`}
                       />
                     </button>
-                    <div className={`${openSubmenu === index ? "max-h-96" : "max-h-0"} overflow-hidden`}>
+                    <div className={`overflow-hidden transition-all duration-300 ease-in-out ${mobileOpenSubmenu === index ? "max-h-96" : "max-h-0"}`}>
                       <ul className="pl-4 mt-1 space-y-1">
                         {item.subItems.map((subItem) => (
                           <li key={subItem.path}>

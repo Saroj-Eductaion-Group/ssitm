@@ -126,7 +126,7 @@ const TnC = () => {
               </h2>
               <p className="text-gray-700 text-base leading-relaxed mb-2">
                 These terms and conditions are governed by and construed in accordance with the laws
-                of [Your Country/State/Region, e.g., India, Uttar Pradesh] and you irrevocably submit
+                of India, Uttar Pradesh and you irrevocably submit
                 to the exclusive jurisdiction of the courts in that State or location.
               </p>
             </div>

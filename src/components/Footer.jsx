@@ -15,19 +15,24 @@ function Footer() {
       <div className="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           
-          {/* Other Colleges */}
           <div className="space-y-4">
             <h3 className="text-lg font-bold">Other Colleges</h3>
             <ul className="space-y-3 text-md">
-              <li>
-                <a href="https://seglko.org/sitm">Saroj Institute of Technology & Management</a>
+              <li className="hover:text-orange-500 transition-colors">
+                <a href="https://seglko.org/sitm" target="_blank" rel="noopener noreferrer">Saroj Institute of Technology &amp; Management</a>
               </li>
-              <li>
-                <a href="https://seglko.org/ssitm">Shivdan Singh Institute of Technology & Management</a>
+              <li className="hover:text-orange-500 transition-colors">
+                <a href="https://seglko.org/ssitm" target="_blank" rel="noopener noreferrer">Shivdan Singh Institute of Technology &amp; Management</a>
               </li>
-              <li><a href="https://seglko.org/scp">Saroj College Of Pharmacy</a></li>
-              <li><a href="https://seglko.org/scep">Saroj College Of Engineering and Polytechnic</a></li>
-              <li><a href="https://seglko.org/lip">Lucknow Institute of Pharmacy</a></li>
+              <li className="hover:text-orange-500 transition-colors">
+                <a href="https://seglko.org/scp" target="_blank" rel="noopener noreferrer">Saroj College Of Pharmacy</a>
+              </li>
+              <li className="hover:text-orange-500 transition-colors">
+                <a href="https://seglko.org/scep" target="_blank" rel="noopener noreferrer">Saroj College Of Engineering and Polytechnic</a>
+              </li>
+              <li className="hover:text-orange-500 transition-colors">
+                <a href="https://seglko.org/lip" target="_blank" rel="noopener noreferrer">Lucknow Institute of Pharmacy</a>
+              </li>
             </ul>
           </div>
 
@@ -70,18 +75,18 @@ function Footer() {
                   10th KM Stone, Aligarh–Mathura Road, Aligarh, Uttar Pradesh,India 202001
                 </span>
               </div>
-              <div className="flex items-center gap-2 hover:text-orange-500 transition-colors">
+              <a href="tel:09555699988" className="flex items-center gap-2 hover:text-orange-500 transition-colors">
                 <Phone size={18} className="shrink-0" />
                 <span>09555699988</span>
-              </div>
-              <div className="flex items-center gap-2 hover:text-orange-500 transition-colors">
+              </a>
+              <a href="tel:09810054878" className="flex items-center gap-2 hover:text-orange-500 transition-colors">
                 <Phone size={18} className="shrink-0" />
                 <span>09810054878</span>
-              </div>
-              <div className="flex items-center gap-2 hover:text-orange-500 transition-colors">
+              </a>
+              <a href="mailto:admission.cell@seglko.org" className="flex items-center gap-2 hover:text-orange-500 transition-colors">
                 <Mail size={18} className="shrink-0" />
                 <span>admission.cell@seglko.org</span>
-              </div>
+              </a>
             </div>
 
             {/* Social Media Icons */}

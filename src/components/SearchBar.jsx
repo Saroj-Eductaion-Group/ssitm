@@ -1,186 +1,106 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
+import { useNavigate } from 'react-router-dom';
 
-
-export default function SearchBar() {
-   
-  // Flattening is important so that hidden/deeply nested pages are searchable. 
-  const flattenNavItems = (navItems) => {
-    const flattenedList = [];
-
-    navItems.forEach(item => {
-      // Add the main nav item itself to the list.
-      if (item.path) {
-        flattenedList.push({
-          name: item.title,
-          link: item.path,
-          category: 'Main Menu',
-        });
-      }
-
-      // Check for and add items from subItems (standard dropdown menus).
-      if (item.subItems) {
-        item.subItems.forEach(subItem => {
-          flattenedList.push({
-            name: subItem.title,
-            link: subItem.path,
-            category: item.title, // Use the parent title as the category.
-          });
-        });
-      }
-
-      // Check for and add items from mega-menu columns.
-      if (item.megaMenu && item.columns) {
-        item.columns.forEach(column => {
-          column.items.forEach(megaItem => {
-            flattenedList.push({
-              name: megaItem.title,
-              link: megaItem.path,
-              category: column.heading, // Use the column heading as the category.
-            });
-          });
-        });
-      }
-    });
-    return flattenedList;
-  };
-  
-  // The navItems data provided by the user. 
- const navItems = [
-  { title: "Home", path: "/" },
+const navItems = [
+  { title: 'Home', path: '/' },
   {
-    title: "About Us",
-     
-    subItems: [{ title: "About SSITM", path: "/about/about-ssitm" }],
+    title: 'About Us',
+    subItems: [{ title: 'About SSITM', path: '/about/about-ssitm' }],
   },
   {
-    title: "Courses",
+    title: 'Courses',
     subItems: [
-      { title: "All Courses", path: "/courses/AllCourses" },
-      { title: "Undergraduate", path: "/courses/undergraduate" },
-      { title: "Postgraduate", path: "/courses/postgraduate" },
-      { title: "Diploma", path: "/courses/diploma" },
+      { title: 'All Courses', path: '/courses/AllCourses' },
+      { title: 'Undergraduate', path: '/courses/undergraduate' },
+      { title: 'Postgraduate', path: '/courses/postgraduate' },
+      { title: 'Diploma', path: '/courses/diploma' },
     ],
   },
   {
-    title: "Admission",
+    title: 'Admission',
     subItems: [
-      { title: "Admission Process", path: "/admission/admission-process" },
-      { title: "Eligibility Criteria", path: "/admission/eligibility" },
-      {
-        title: "Fee Structure", path: "/ssitm/admission/fee-structure" },
+      { title: 'Admission Process', path: '/admission/admission-process' },
+      { title: 'Eligibility Criteria', path: '/admission/eligibility' },
+      { title: 'Fee Structure', path: '/admission/fee-structure' },
     ],
   },
-  { title: "Contact Us", path: "/contact-us" },
+  { title: 'Contact Us', path: '/contact-us' },
 ];
 
-  // State to hold the current search query from the input field.
+const flattenNavItems = (items) => {
+  const list = [];
+  items.forEach(item => {
+    if (item.path) list.push({ name: item.title, link: item.path, category: 'Main Menu' });
+    if (item.subItems) {
+      item.subItems.forEach(sub => list.push({ name: sub.title, link: sub.path, category: item.title }));
+    }
+  });
+  return list;
+};
+
+const allItems = flattenNavItems(navItems);
+
+export default function SearchBar() {
   const [query, setQuery] = useState('');
-
-  // State to hold the items that match the search query.
   const [filteredItems, setFilteredItems] = useState([]);
+  const [open, setOpen] = useState(false);
+  const navigate = useNavigate();
+  const ref = useRef(null);
 
-  // State to manage the loading status  
-  const [isLoading, setIsLoading] = useState(true);
+  useEffect(() => {
+    const q = query.trim().toLowerCase();
+    if (!q) { setFilteredItems([]); setOpen(false); return; }
+    setFilteredItems(allItems.filter(item => item.name.toLowerCase().includes(q)));
+    setOpen(true);
+  }, [query]);
 
-  // State to handle any errors  
-  const [error, setError] = useState(null);
+  useEffect(() => {
+    const handleClick = (e) => { if (ref.current && !ref.current.contains(e.target)) setOpen(false); };
+    document.addEventListener('mousedown', handleClick);
+    return () => document.removeEventListener('mousedown', handleClick);
+  }, []);
 
-  // A function to handle changes in the search input field.
-  const handleSearchChange = (e) => {
-    setQuery(e.target.value);
+  const handleSelect = (link) => {
+    navigate(link);
+    setQuery('');
+    setOpen(false);
   };
 
-  // This useEffect hook processes the nav data and filters it based on the query.
-  // It runs once on mount to populate the initial list.
-  useEffect(() => {
-    const processNavData = () => {
-      try {
-        // Flatten the nested navItems data structure.
-        const processedData = flattenNavItems(navItems);
-        
-        // This simulates the data being "fetched" and then displayed.
-        setFilteredItems(processedData);
-        setIsLoading(false);
-      } catch (err) {
-        setError('Failed to process navigation data.');
-        setIsLoading(false);
-      }
-    };
-    processNavData();
-  }, []); // Empty dependency array ensures this runs only once on component mount.
-
-  // This useEffect hook filters the items whenever the 'query' state changes.
-  useEffect(() => {
-    // If the query is empty, show all items from the processed nav data.
-    if (query.trim() === '') {
-      const processedData = flattenNavItems(navItems);
-      setFilteredItems(processedData);
-      return;
-    }
-
-    // Filter the processed data based on the search query.
-    const processedData = flattenNavItems(navItems);
-    const newFilteredItems = processedData.filter(item =>
-      item.name.toLowerCase().includes(query.toLowerCase())
-    );
-
-    // Update the 'filteredItems' state with the new, filtered list.
-    setFilteredItems(newFilteredItems);
-  }, [query]); // Re-run when query changes.
-
   return (
-    <div className="relative">
-      {/* Search bar container */}
+    <div className="relative" ref={ref}>
       <div className="relative">
         <span className="absolute inset-y-0 left-0 flex items-center pl-3">
-          {/* Search icon (SVG) */}
           <svg className="w-5 h-5 text-gray-400" fill="currentColor" viewBox="0 0 20 20">
-            <path
-              fillRule="evenodd"
-              d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z"
-              clipRule="evenodd"
-            />
+            <path fillRule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clipRule="evenodd" />
           </svg>
         </span>
         <input
           type="text"
-          placeholder="Search"
+          placeholder="Search pages..."
           value={query}
-          onChange={handleSearchChange}
-           
-          className="w-full py-3 pl-10 pr-4 text-gray-900 bg-gray-100 placeholder-gray-400 rounded-full focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-colors duration-200"
+          onChange={e => setQuery(e.target.value)}
+          className="w-full py-2 pl-10 pr-4 text-gray-900 bg-gray-100 placeholder-gray-400 rounded-full focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-colors duration-200 text-sm"
         />
       </div>
 
-     
-      {query.trim() !== '' && (
-        <div 
-          className="absolute top-full left-0 right-0 mt-2 bg-white rounded-lg shadow-lg z-1000 p-4"
-          style={{ width: '100%' }} // Ensure it stretches to the full width of its parent
-        >
-          {/* Conditional rendering based on loading state or error */}
-          {isLoading && <p className="text-center text-gray-500 italic">Processing navigation data...</p>}
-          {error && <p className="text-center text-red-500 italic">{error}</p>}
-          
-          {/* Show the search results if not loading and no error */}
-          {!isLoading && !error && (
-            filteredItems.length > 0 ? (
-              <ul className="divide-y divide-gray-200 max-h-96 overflow-y-auto z-1000">
-                {filteredItems.map(item => (
-                  <li key={item.link} className="py-2">
-                    <a href={item.link} className="flex flex-col justify-start items-start text-gray-800 hover:text-orange-600 transition-colors duration-200">
-                      <span className="font-medium">{item.name}</span>
-                      {/* Display the path link below the title */}
-                      <span className="text-xs text-gray-500 mt-1">{item.link}</span>
-                      {/* Display the category to provide more context */}
-                      <span className="text-sm text-gray-500 mt-1">{item.category}</span>
-                    </a>
-                  </li>
-                ))}
-              </ul>
-            ) : (
-              <p className="text-center text-gray-500 italic">No results found for "{query}".</p>
-            )
+      {open && (
+        <div className="absolute top-full right-0 mt-2 w-64 bg-white rounded-lg shadow-xl z-50 border border-gray-100 overflow-hidden">
+          {filteredItems.length > 0 ? (
+            <ul className="divide-y divide-gray-100 max-h-72 overflow-y-auto">
+              {filteredItems.map(item => (
+                <li key={item.link}>
+                  <button
+                    onClick={() => handleSelect(item.link)}
+                    className="flex flex-col w-full text-left px-4 py-3 hover:bg-orange-50 transition-colors duration-150"
+                  >
+                    <span className="font-medium text-gray-800 text-sm">{item.name}</span>
+                    <span className="text-xs text-gray-400 mt-0.5">{item.category}</span>
+                  </button>
+                </li>
+              ))}
+            </ul>
+          ) : (
+            <p className="text-center text-gray-500 text-sm italic py-4">No results found for "{query}"</p>
           )}
         </div>
       )}

@@ -1,5 +1,4 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 
 const TechnologyCTA = () => {
   return (
@@ -12,9 +11,14 @@ const TechnologyCTA = () => {
           Join Shivdan Singh Institute of Technology and Management and be a part of the future of innovation.
         </p>
         
-          <Link to='https://seglko.in8.nopaperforms.com/' className="px-8 py-3 bg-black hover:bg-gray-800 transition duration-300 text-white rounded-full border border-white">
-            Apply Now
-          </Link>
+        <a
+          href='https://seglko.in8.nopaperforms.com/'
+          target="_blank"
+          rel="noopener noreferrer"
+          className="px-8 py-3 bg-black hover:bg-gray-800 transition duration-300 text-white rounded-full border border-white"
+        >
+          Apply Now
+        </a>
       
       </div>
     </section>

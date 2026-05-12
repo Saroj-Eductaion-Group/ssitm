@@ -1,19 +1,14 @@
 import React from 'react';
-import { Link } from 'react-router-dom'
+import { ExternalLink, Download } from 'lucide-react';
 import Layout from '.././components/Layout';
-import { Download, ExternalLink } from 'lucide-react';
 import SSITMQR from '../assets/SSITMQR.png';
-import SSITMCampus from '../assets/SSITMCampus.jpg'
+import SSITMCampus from '../assets/SSITMCampus.jpg';
 
 const CollegePaymentCard = ({ instituteName, location, code, contactEmail, onlinePortalUrl }) => {
   return (
     <div className="bg-white rounded-2xl shadow-lg border-t-4 border-blue-600 p-6 flex flex-col items-center text-center md:text-left md:items-start">
       <div className="flex items-center mb-4">
-        <img
-          src= {SSITMCampus}
-          alt="Institute Logo"
-          className="w-10 h-10 rounded-full mr-3"
-        />
+        <img src={SSITMCampus} alt="Institute Logo" className="w-10 h-10 rounded-full mr-3 object-cover" />
         <h2 className="text-xl md:text-2xl font-bold text-blue-800">{instituteName}</h2>
       </div>
 
@@ -24,14 +19,13 @@ const CollegePaymentCard = ({ instituteName, location, code, contactEmail, onlin
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6 w-full">
         <div className="flex flex-col items-center md:items-start">
           <h3 className="text-lg font-semibold text-blue-700 mb-2">Payment QR Code</h3>
-          <Link to="https://smartpay.easebuzz.in/75653/Application">
-          <img
-            src={SSITMQR}
-            alt={`${instituteName} QR Code`}
-            target= "_blank"
-            className="w-36 h-36 border border-gray-300 rounded-lg mb-3"
+          <a href={onlinePortalUrl} target="_blank" rel="noopener noreferrer">
+            <img
+              src={SSITMQR}
+              alt={`${instituteName} QR Code`}
+              className="w-36 h-36 border border-gray-300 rounded-lg mb-3"
             />
-            </Link>
+          </a>
           <a
             href={SSITMQR}
             download
@@ -44,7 +38,7 @@ const CollegePaymentCard = ({ instituteName, location, code, contactEmail, onlin
         <div className="flex flex-col items-center md:items-start">
           <h3 className="text-lg font-semibold text-blue-700 mb-2">Payment Options</h3>
           <a
-            href={onlinePortalUrl || "#"}
+            href={onlinePortalUrl}
             target="_blank"
             rel="noopener noreferrer"
             className="flex items-center justify-center bg-blue-700 text-white font-bold py-3 px-6 rounded-full shadow-md hover:bg-blue-800 transition-colors w-full max-w-[200px]"
@@ -56,10 +50,7 @@ const CollegePaymentCard = ({ instituteName, location, code, contactEmail, onlin
 
       <div className="mt-6 text-center md:text-left w-full">
         <p className="text-gray-600 text-sm">For payment issues, contact :</p>
-        <a
-          href={`mailto:${contactEmail}`}
-          className="text-blue-600 hover:text-blue-800 transition-colors font-medium"
-        >
+        <a href={`mailto:${contactEmail}`} className="text-blue-600 hover:text-blue-800 transition-colors font-medium">
           {contactEmail}
         </a>
       </div>

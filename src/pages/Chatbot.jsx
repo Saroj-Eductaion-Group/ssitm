@@ -389,7 +389,7 @@ const Chatbot = () => {
       )}
 
       {isOpen && (
-        <div className="w-80 h-[32rem] bg-white rounded-lg shadow-xl flex flex-col overflow-hidden border border-gray-200">
+        <div className="w-[calc(100vw-2rem)] max-w-sm h-[32rem] bg-white rounded-lg shadow-xl flex flex-col overflow-hidden border border-gray-200">
           <div className="bg-gradient-to-r from-orange-500 to-red-500 text-white p-4 flex justify-between items-center">
             <div className="flex items-center">
               <div className="w-8 h-8 rounded-full bg-gradient-to-r from-orange-500 to-red-500 flex items-center justify-center mr-2">

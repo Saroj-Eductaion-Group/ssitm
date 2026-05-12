@@ -6,7 +6,7 @@ import WhyChooseUs from "../WhyChooseUs";
 const About = () => {
   return (
     <Layout>
-      <section className="bg-orange-50 py-15">
+      <section className="bg-orange-50 py-12 sm:py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 bg-white shadow-xl rounded-xl p-8">
           <div className="grid md:grid-cols-2 gap-8 items-center">
             <div>

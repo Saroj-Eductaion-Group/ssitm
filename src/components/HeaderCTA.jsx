@@ -1,26 +1,22 @@
-
 import React from 'react';
 
 const HeaderCTA = () => {
   return (
-    <div className="relative overflow-hidden py-2  bg-orange-600 sm:bg-orange-50 ">
-      <div className="whitespace-nowrap text-center text-white sm:text-black text-sm tracking-tight transition-all duration-300 animate-[pulse_2s_infinite] whitespace-nowrap">
-       Admissions closing soon! Secure your seat at SSITM 
+    <div className="overflow-hidden py-2 bg-orange-600">
+      <div className="animate-marquee whitespace-nowrap text-center text-white text-sm font-medium tracking-wide sm:animate-none">
+        🎓 Admissions Open 2025–26 — Secure your seat at SSITM Aligarh &nbsp;|&nbsp; AKTU Affiliated &nbsp;|&nbsp; AKTU Code: 007 &nbsp;|&nbsp; Toll Free: 1800-180-7686
       </div>
-
-
-       <style jsx>{`
-        @keyframes pulse {
-  0%, 100% {
-    transform: scale(1);
-    opacity: 1;
-  }
-  50% {
-    transform: scale(1.05);
-    opacity: 1;
-  }
-}
-
+      <style>{`
+        @keyframes marquee {
+          0% { transform: translateX(100%); }
+          100% { transform: translateX(-100%); }
+        }
+        @media (max-width: 640px) {
+          .animate-marquee {
+            display: inline-block;
+            animation: marquee 8s linear infinite;
+          }
+        }
       `}</style>
     </div>
   );

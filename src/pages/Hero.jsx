@@ -172,7 +172,7 @@ const Hero = () => {
                 whileHover={{ scale: 1.02 }}
               />
               <motion.div
-                className="absolute -top-6 left-6 bg-orange-600 p-2 rounded-xl shadow-lg z-30 text-white"
+                className="absolute -top-4 left-4 bg-orange-600 p-2 rounded-xl shadow-lg z-30 text-white"
                 variants={floatingVariants}
                 animate="float"
               >

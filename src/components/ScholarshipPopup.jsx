@@ -28,7 +28,7 @@ const ScholarshipPopup = () => {
   // Calculate time left until August 31, 2025
   const calculateTimeLeft = () => {
     const now = new Date().getTime();
-    const targetDate = new Date('August 31, 2025 23:59:59').getTime();
+    const targetDate = new Date('December 31, 2025 23:59:59').getTime();
     const difference = targetDate - now;
     
     if (difference > 0) {
@@ -194,7 +194,7 @@ const ScholarshipPopup = () => {
                 </div>
               </div>
               <div className="text-center mt-2 text-orange-200 text-xs">
-                Until August 31, 2025
+                Until December 31, 2025
               </div>
             </div>
           )}

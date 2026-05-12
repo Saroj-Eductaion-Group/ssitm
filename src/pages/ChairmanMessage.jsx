@@ -3,7 +3,7 @@ import chairmanImg from '../assets/chairman.jpg'
 const ChairmanMessage = () => {
   return (
     <div className="bg-orange-50">
-      <div className="container mx-auto px-4 py-15">
+      <div className="container mx-auto px-4 py-16">
       
         {/* Main Content */}
         <div className="bg-white/95 backdrop-blur-lg rounded-xl shadow-2xl overflow-hidden animate-slide-up-delay">

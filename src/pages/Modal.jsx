@@ -80,20 +80,23 @@ const Modal= () => {
       onClick={showPopup}
       style={{
         position: "fixed",
-        right: "-60px",
+        right: "-52px",
         top: "50%",
         transform: "translateY(-50%) rotate(-90deg)",
         cursor: "pointer",
-        backgroundColor: "green",
-        color: "white", 
-        padding: "0.3rem 2rem",
-        borderRadius: "0.375rem 0.375rem 0 0.375rem", 
-        boxShadow: "0 10px 15px -3px rgba(220, 38, 38, 0.5), 0 4px 6px -2px rgba(220, 38, 38, 0.25)", 
-        transition: "background-color 0.3s ease", 
+        backgroundColor: "#16a34a",
+        color: "white",
+        padding: "0.3rem 1.5rem",
+        fontSize: "0.85rem",
+        fontWeight: "600",
+        borderRadius: "0.375rem 0.375rem 0 0",
+        boxShadow: "0 4px 12px rgba(0,0,0,0.2)",
+        transition: "background-color 0.3s ease",
         zIndex: 50,
+        whiteSpace: "nowrap",
       }}
     >
-      Enquire Now!
+      Enquire Now
     </button>
   );
 };
